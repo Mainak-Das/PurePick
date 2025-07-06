@@ -10,7 +10,7 @@ const Footer = () => {
                 <div>
                     <img className="w-34 md:w-50" src={assets.logo} alt="logo" />
                     <p className="max-w-[410px] mt-6">
-                        We deliver fresh groceries and snacks straight to your door. Trusted by thousands, we aim to make your shopping experience simple and affordable.
+                        PurePick delivers fresh groceries, fruits, veggies, and snacks in just 30 minutes. Fast, affordable, and trusted by thousands — shopping has never been this easy.
                     </p>
                 </div>
                 <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5">
