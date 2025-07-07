@@ -50,7 +50,7 @@ const AddAddress = () => {
             <span className='font-semibold text-primary'> Address</span>
         </p>
 
-        <div className='flex flex-col-reverse md:flex-row justify-between mt-10'>
+        <div className='flex flex-col-reverse md:flex-row justify-between mt-10 lg:ml-25'>
             <div className='flex-1 max-w-md'>
                 <form onSubmit={onSubmitHandler} className='space-y-3 mt-6 text-sm'>
                     
@@ -83,7 +83,7 @@ const AddAddress = () => {
                     </button>
                 </form>
             </div>
-            <img className='md:mr-16 mb-16 md:mt-0' src={assets.add_address_image} alt=''/>
+            <img className='w-130 h-auto md:w-75 lg:w-120 md:ml-6 md:mr-16 mb-16 md:mt-0 lg:mt-[-2.5rem] lg:mr-50' src={assets.add_address_image} alt=''/>
         </div>
     </div>
   )
