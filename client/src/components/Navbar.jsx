@@ -66,13 +66,12 @@ const Navbar = () => {
                         placeholder=""
                     />
 
-                    {/* Fake placeholder: 'Search apple' */}
                     {!searchQuery && (
                         <span
                             className={`absolute left-4 top-1.5 text-gray-400 transition-all duration-300 ease-in-out pointer-events-none z-0 
                 ${animate ? "translate-y-[-8px] opacity-0" : "translate-y-0 opacity-100"}`}
                         >
-                            Search '<span className="font-medium">{suggestions[currentSuggestionIndex]}</span>'
+                            Search <span className="font-medium text-primary">{suggestions[currentSuggestionIndex]}</span>
                         </span>
                     )}
 
