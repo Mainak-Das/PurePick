@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
 // import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = useState(false)
     const {user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery, getCartCount} = useAppContext();
     // const navigate = useNavigate();
+
+    // Search TextBox Animation
+    const suggestions = ["apple", "eggs", "milk", "bread", "paneer"];
+    const [currentSuggestionIndex, setCurrentSuggestionIndex] = useState(0);
+    const [animate, setAnimate] = useState(false);
     
     const logout = async ()=> {
         setUser(null);
@@ -19,6 +24,19 @@ const Navbar = () => {
             navigate('/products')
         }
     }, [searchQuery])
+
+    // Search TextBox Animation
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setAnimate(true);
+            setTimeout(() => {
+                setCurrentSuggestionIndex((prev) => (prev + 1) % suggestions.length);
+                setAnimate(false);
+            }, 300);
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -33,10 +51,34 @@ const Navbar = () => {
                 <NavLink to='/products'  className='transition-transform ease-in-out duration-300 transform hover:scale-105 hover:text-[#36a22c] hover:font-semibold'>All Product</NavLink>
                 <NavLink to='/'  className='transition-transform ease-in-out duration-300 transform hover:scale-105 hover:text-[#36a22c] hover:font-semibold'>Contact</NavLink>
 
-                <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
+                {/* <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
                     <input onChange={(e)=> setSearchQuery(e.target.value)} className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
                     <img src={assets.search_icon} alt='search' className='w-4 h-4' />
+                </div> */}
+
+                {/* Animated Search Box */}
+                <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full relative w-64">
+                    <input
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        value={typeof searchQuery === 'string' ? searchQuery : ""}
+                        type="text"
+                        className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500 z-10"
+                        placeholder=""
+                    />
+
+                    {/* Fake placeholder: 'Search apple' */}
+                    {!searchQuery && (
+                        <span
+                            className={`absolute left-4 top-1.5 text-gray-400 transition-all duration-300 ease-in-out pointer-events-none z-0 
+                ${animate ? "translate-y-[-8px] opacity-0" : "translate-y-0 opacity-100"}`}
+                        >
+                            Search '<span className="font-medium">{suggestions[currentSuggestionIndex]}</span>'
+                        </span>
+                    )}
+
+                    <img src={assets.search_icon} alt="search" className="w-4 h-4 z-10" />
                 </div>
+
 
                 <div onClick={()=> navigate("/cart")} className="relative cursor-pointer">
                     <img src={assets.nav_cart_icon} alt='cart' className='w-6 opacity-80' />

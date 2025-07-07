@@ -1,4 +1,3 @@
-// import logo from "./logo.svg";
 import logo from "./logo.png";
 import search_icon from "./search_icon.svg";
 import remove_icon from "./remove_icon.svg";
@@ -205,7 +204,7 @@ export const dummyProducts = [
   // Vegetables
   {
     _id: "gd46g23h",
-    name: "Potato 500g",
+    name: "Potato 1 Kg.",
     category: "Vegetables",
     price: 25,
     offerPrice: 20,
